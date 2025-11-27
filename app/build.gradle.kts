@@ -59,6 +59,7 @@ dependencies {
 
     // Room dependencies
     implementation(libs.bundles.room)
+    implementation(libs.androidx.compose.runtime)
     ksp(libs.room.compiler)
 
     // ViewModel and Lifecycle for Compose
