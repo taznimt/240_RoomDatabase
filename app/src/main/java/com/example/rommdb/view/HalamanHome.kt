@@ -1,5 +1,6 @@
 package com.example.rommdb.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -90,5 +91,57 @@ fun BodyHome(
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
         }
+    }
+}
+@Composable
+fun ListSiswa(
+    itemSiswa: List<Siswa>,
+    onSiswaClick: (Siswa) -> Unit,
+    modifier: Modifier = Modifier
+){
+    LazyColumn(modifier = Modifier) {
+        items(items = itemSiswa, key = {it.id}){
+                person -> DataSiswa(
+            siswa = person,
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_small))
+                .clickable{onSiswaClick(person)}
+        )
+        }
+    }
+}
+
+@Composable
+fun DataSiswa(
+    siswa: Siswa,
+    modifier: Modifier = Modifier
+){
+    Card(
+        modifier = modifier,
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)))
+        {
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(siswa.nama,
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    imageVector = Icons.Default.Phone,
+                    contentDescription = null,
+                )
+                Text(siswa.telpon,
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+            Text(siswa.alamat,
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
+
     }
 }
